@@ -1,5 +1,7 @@
 import glob
 import json
+from pprint import pprint
+
 import yaml
 from pathlib import Path
 from vojtovo import *
@@ -14,6 +16,12 @@ class Project:
         self.data_dir = data_dir
         self.image_seeds = self.get_image_seeds()
         self.style_seeds = self.get_style_seeds()
+        self.pkl = self.get_pkl_filename()
+
+    def get_pkl_filename(self):
+        pkls = glob.glob(self.data_dir + '/*.pkl')
+        pprint(pkls)
+        return pkls[0]
 
     def get_seed_url(self, seed):
         return "{}/{}.jpg".format(self.data_dir, seed)
