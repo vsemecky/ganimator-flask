@@ -30,6 +30,19 @@ def styles():
     return flask.render_template('seeds.html', type="styles", seeds=project.style_seeds, title="Styles")
 
 
+# System info
+@app.route("/sysinfo")
+def sysinfo():
+    sysinfo = {
+        'cpu_cores': 2,
+        'cpu_threads': 4,
+        'ram': 24,
+        'gpu_ram': 16,
+        'gpu_name': "V100",
+    }
+    return flask.render_template('sysinfo.html', sysinfo=sysinfo)
+
+
 if __name__ == "__main__":
     try:
         import google.colab
