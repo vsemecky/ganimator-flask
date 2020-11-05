@@ -4,6 +4,7 @@ from flask_ngrok import run_with_ngrok
 import project
 from vojtovo import *
 
+
 project_dir = "/deep/ganimator-flask/projects/Demo"
 project = project.Project(project_dir)
 
@@ -29,9 +30,10 @@ def styles():
 
 
 if __name__ == "__main__":
-    if 'google.colab' in sys.modules:
+    try:
+        import google.colab
         print("Colab: YES")
         run_with_ngrok(app)  # In Google Colab run with ngrok
-    else:
-        print("Colab: NO")
-        app.run()  # Outside of COlab, run normally
+    except:
+        print("Colab: No")
+        app.run()  # Outside of Colab, run normally
