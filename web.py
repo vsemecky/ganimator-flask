@@ -4,10 +4,11 @@ from flask_ngrok import run_with_ngrok
 import project
 from vojtovo import *
 
+if len(sys.argv) < 2:
+    exit("Missing project dir.\n\nUsage:\n\tpython web.py \"/path/to/my project\"")
 
-project_dir = "/deep/ganimator-flask/projects/Demo"
+project_dir = sys.argv[1]  # The first command line argument
 project = project.Project(project_dir)
-
 app = flask.Flask(__name__, static_url_path='', static_folder=project_dir)
 
 
@@ -33,7 +34,8 @@ if __name__ == "__main__":
     try:
         import google.colab
         print("Colab: YES")
-        run_with_ngrok(app)  # In Google Colab run with ngrok
+        run_with_ngrok(app)  # In Google Colab run with Ngrok
     except:
         print("Colab: No")
-        app.run()  # Outside of Colab, run normally
+
+    app.run()
