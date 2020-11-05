@@ -1,6 +1,7 @@
 import glob
 from pprint import pprint
 from vojtovo import *
+from ganimator import *
 
 
 class Project:
@@ -38,3 +39,7 @@ class Project:
         for file in files:
             seeds.append(os.path.splitext(os.path.basename(file))[0])  # Append filename without extension
         return seeds
+
+    def add_image(self, seed):
+        image_pil = generate_image(pkl=self.pkl, seed=seed)
+        image_pil.save("%s/%s.jpg" % (self.data_dir, seed))
